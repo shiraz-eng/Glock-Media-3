@@ -1,0 +1,43 @@
+TRUSTED BY MARQUEE — Zero-Config Folder Loader
+==============================================
+
+You just drop images into a folder. No manifest, no code edits.
+
+SETUP (once)
+1) Copy trusted-marquee.js into your project (next to script.js).
+2) Copy the images/trusted/ folder into your project.
+3) On any page where you want the marquee, use:
+
+     <div id="trusted-marquee"></div>
+     <script src="trusted-marquee.js"></script>
+
+ADDING MORE LOGOS
+Two ways depending on your host — pick either, or use both:
+
+A) Numbered names (works EVERYWHERE — Netlify, Vercel, GitHub Pages,
+   plain Apache/Nginx, local files, everything):
+     images/trusted/1.png
+     images/trusted/2.png
+     images/trusted/3.jpg
+     ...
+   Just save the next file as the next number. Any of these
+   extensions work: .png .jpg .jpeg .webp .svg .gif
+   Sample images 1.png and 2.png are already included in this zip.
+
+B) Any filenames (works when your server has "directory listing"
+   / "autoindex" enabled — most local dev servers do, and Apache
+   often does):
+     images/trusted/dose.png
+     images/trusted/screenrant.svg
+     images/trusted/anything-you-want.webp
+   The script fetches the folder and reads whatever files are there.
+
+The script tries method B first, then falls back to method A, so
+your logos show up either way.
+
+TROUBLESHOOTING
+- Nothing appears? Open DevTools (F12) → Network tab → reload.
+  If you see 404s for 1.png, 2.png, ... your images aren't in
+  images/trusted/ or aren't numbered. Rename them 1.png, 2.png, ...
+- Wrong folder? Add data-folder="path/to/your/folder" to the
+  <div id="trusted-marquee"> tag.

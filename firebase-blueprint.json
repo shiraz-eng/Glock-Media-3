@@ -1,0 +1,40 @@
+{
+  "collections": {
+    "settings": {
+      "documents": {
+        "website": {
+          "fields": {
+            "hero": "map",
+            "about": "map",
+            "showcase": "map",
+            "services": "map",
+            "process": "map",
+            "testimonials": "map",
+            "industries": "map",
+            "faq": "map",
+            "cta": "map",
+            "footer": "map"
+          }
+        }
+      }
+    },
+    "admins": {
+      "fields": {
+        "email": "string",
+        "createdAt": "timestamp"
+      }
+    },
+    "videos": {
+      "fields": {
+        "id": "string",
+        "title": "string",
+        "fileName": "string",
+        "originalName": "string",
+        "videoUrl": "string",
+        "uploadedAt": "timestamp",
+        "size": "number",
+        "type": "string"
+      }
+    }
+  }
+}

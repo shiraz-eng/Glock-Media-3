@@ -1,0 +1,8 @@
+{
+  "name": "Glock Media",
+  "description": "Glock Media is a digital-first media production & content growth agency specializing in YouTube, TikTok, Snapchat, Instagram, and modern content ecosystems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
