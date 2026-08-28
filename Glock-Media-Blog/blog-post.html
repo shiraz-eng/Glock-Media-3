@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Digital Workflows are Reshaping Content Creation — Glock Media Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/components.css">
+<link rel="stylesheet" href="Blog-Post.css">
+ <link rel="icon" type="image/png" href="/favicon-2.png.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+<body>
+
+
+<div id="site-header"></div>
+
+<!-- Article Hero (dynamic) -->
+<section class="article-hero" id="articleHero">
+<img src="" alt="" class="article-hero-img" id="heroImg">
+<div class="article-hero-overlay"></div>
+<div class="article-hero-content">
+<div class="article-hero-label"><span class="dot"></span><span id="heroCategory">Loading…</span></div>
+<h1 class="article-hero-title" id="heroTitle">Loading…</h1>
+<div class="article-hero-meta" id="heroMeta"></div>
+</div>
+</section>
+
+<!-- Article Layout -->
+<div class="article-layout">
+
+<!-- Sticky Share Bar -->
+<div class="share-bar reveal">
+<div class="share-label">Share</div>
+<button class="share-btn" onclick="shareTwitter()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></button>
+<button class="share-btn" onclick="shareLinkedIn()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></button>
+<button class="share-btn" onclick="copyLink()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></button>
+<button class="share-btn" onclick="shareFacebook()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></button>
+</div>
+
+<!-- Main Article Content (dynamic) -->
+<article class="article-main reveal">
+<div class="article-meta-bar" id="articleMetaBar"></div>
+<div class="article-body" id="articleBody"><p style="color:var(--text-muted)">Loading…</p></div>
+
+<!-- Author Bio -->
+<div class="author-bio reveal" id="authorBio" style="display:none"></div>
+</article>
+
+<!-- Table of Contents Sidebar -->
+<aside class="toc-sidebar reveal" id="tocSidebar" style="display:none">
+  <div class="toc-title">Table of Contents</div>
+  <ul class="toc-list" id="tocList"></ul>
+</aside>
+
+</div>
+
+<!-- Related Articles -->
+<section class="related-section reveal" id="relatedSection" style="display:none">
+  <div class="related-header">
+    <h2 class="related-title">More from Glock Media</h2>
+    <div id="viewAllContainer"></div>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+<div class="newsletter-bg"></div>
+<div class="newsletter-container reveal">
+<div class="newsletter-label">Stay Ahead</div>
+<h2 class="newsletter-title">Get the insights that<br>drive billions of views.</h2>
+<p class="newsletter-subtitle">Weekly breakdowns of what is working in content, delivered straight to your inbox. No fluff, just data-driven strategy.</p>
+<form class="newsletter-form" onsubmit="event.preventDefault();alert('Thanks for subscribing!');">
+<input type="email" class="newsletter-input" placeholder="Enter your email" required>
+<button type="submit" class="newsletter-btn">Subscribe</button>
+</form>
+</div>
+</section>
+<div id="site-footer"></div>
+
+
+<script>
+// Nav scroll effect
+const nav=document.getElementById('navbar') || document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  if (nav) {
+    if(window.scrollY>50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }
+});
+
+// Reading progress bar
+const progressBar=document.getElementById('readingProgress');
+window.addEventListener('scroll',()=>{
+  if (progressBar) {
+    const scrollTop=window.scrollY;
+    const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    const progress=(scrollTop/docHeight)*100;
+    progressBar.style.width=progress+'%';
+  }
+});
+
+// Scroll reveal
+const revealElements=document.querySelectorAll('.reveal');
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.02});
+revealElements.forEach(el=>revealObserver.observe(el));
+window.revealObserver = revealObserver;
+
+// Dynamic Table of Contents wiring function
+window.setupDynamicToc = function() {
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('.article-body h2[id]');
+  
+  const handleScroll = () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 250) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  };
+  
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Trigger immediately to select active
+  
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 120,
+          behavior: 'smooth'
+        });
+        if (history.pushState) {
+          history.pushState(null, null, href);
+        } else {
+          location.hash = href;
+        }
+      }
+    });
+  });
+};
+
+// Share functions
+function shareTwitter(){window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400')}
+function shareLinkedIn(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href),'_blank','width=600,height=400')}
+function shareFacebook(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank','width=600,height=400')}
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied to clipboard!'))}
+</script>
+
+
+<!-- Dynamic navbar -->
+<script type="module" src="/Admin-Panel/nav-loader.js"></script>
+
+<!-- Static Data Fallback -->
+<script src="/js/data.js"></script>
+
+<!-- Dynamic blog loader -->
+<script type="module">
+import { fetchBlogBySlug, fetchBlogs, escapeHTML, fmtDate, isValidRealBlog } from "./blog-frontend.js";
+
+function isStatNumber(text) {
+  text = text.trim();
+  if (text.length === 0 || text.length > 8) return false;
+  if (!/\d/.test(text)) return false;
+  return /^[+-]?\d+(\.\d+)?\s*[xX%kKmMBtT]?\+?$/.test(text);
+}
+
+function formatStatBoxes(htmlContent) {
+  const temp = document.createElement("div");
+  temp.innerHTML = htmlContent;
+  
+  const paragraphs = Array.from(temp.querySelectorAll("p"));
+  let i = 0;
+  while (i < paragraphs.length - 1) {
+    const items = [];
+    let j = i;
+    while (j < paragraphs.length - 1) {
+      const pNum = paragraphs[j];
+      const pLabel = paragraphs[j + 1];
+      
+      if (isStatNumber(pNum.textContent) && pNum.nextElementSibling === pLabel && pLabel.tagName === "P" && !isStatNumber(pLabel.textContent)) {
+        items.push({ numEl: pNum, labelEl: pLabel });
+        j += 2;
+      } else {
+        break;
+      }
+    }
+    
+    if (items.length >= 1) {
+      const parent = items[0].numEl.parentNode;
+      if (parent) {
+        const statBox = document.createElement("div");
+        statBox.className = "stat-box";
+        
+        if (items.length !== 3) {
+          statBox.style.gridTemplateColumns = `repeat(${items.length}, 1fr)`;
+        }
+        
+        items.forEach(item => {
+          const statItem = document.createElement("div");
+          statItem.className = "stat-box-item";
+          
+          const numDiv = document.createElement("div");
+          numDiv.className = "stat-box-number";
+          numDiv.innerHTML = item.numEl.innerHTML;
+          
+          const labelDiv = document.createElement("div");
+          labelDiv.className = "stat-box-label";
+          labelDiv.innerHTML = item.labelEl.innerHTML;
+          
+          statItem.appendChild(numDiv);
+          statItem.appendChild(labelDiv);
+          statBox.appendChild(statItem);
+        });
+        
+        parent.insertBefore(statBox, items[0].numEl);
+        
+        items.forEach(item => {
+          item.numEl.remove();
+          item.labelEl.remove();
+        });
+      }
+      
+      i += items.length * 2;
+    } else {
+      i++;
+    }
+  }
+  
+  return temp.innerHTML;
+}
+
+const params = new URLSearchParams(location.search);
+const slug = params.get("slug");
+const preview = params.get("preview") === "true";
+
+function setMeta(name, value, attr="name") {
+  if (!value) return;
+  let el = document.querySelector(`meta[${attr}="${name}"]`);
+  if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el); }
+  el.setAttribute("content", value);
+}
+
+function renderStaticBodyToHTML(bodyArray) {
+  if (!bodyArray || !Array.isArray(bodyArray)) return "";
+  return bodyArray.map(item => {
+    if (typeof item === "string") return `<p>${item}</p>`;
+    
+    if (item.p) {
+      return `<p>${item.p}</p>`;
+    }
+    if (item.h2) {
+      return `<h2 id="${item.id || ""}">${escapeHTML(item.h2)}</h2>`;
+    }
+    if (item.takeaways) {
+      const title = item.takeaways.title || "Key Takeaways";
+      const listItems = (item.takeaways.items || []).map(li => `<li>${escapeHTML(li)}</li>`).join("");
+      return `<div class="takeaways-box">
+        <h4>${escapeHTML(title)}</h4>
+        <ul>${listItems}</ul>
+      </div>`;
+    }
+    if (item.image) {
+      const src = item.image.src || "";
+      const alt = item.image.alt || "";
+      const caption = item.image.caption || "";
+      return `<img src="${src}" alt="${escapeHTML(alt)}" class="article-image">
+      ${caption ? `<div class="article-image-caption">${escapeHTML(caption)}</div>` : ""}`;
+    }
+    if (item.quote) {
+      return `<blockquote>${item.quote}</blockquote>`;
+    }
+    if (item.list) {
+      const listItems = item.list.map(li => `<li>${li}</li>`).join("");
+      return `<ul>${listItems}</ul>`;
+    }
+    if (item.stats) {
+      const statItems = item.stats.map(s => `
+        <div class="stat-box-item">
+          <div class="stat-box-number">${escapeHTML(s.number)}</div>
+          <div class="stat-box-label">${escapeHTML(s.label)}</div>
+        </div>
+      `).join("");
+      return `<div class="stat-box" style="grid-template-columns: repeat(${item.stats.length || 3}, 1fr)">${statItems}</div>`;
+    }
+    if (item.pullquote) {
+      return `<div class="pull-quote-box">
+        <p>${item.pullquote.text}</p>
+        <div class="quote-author">${escapeHTML(item.pullquote.author || "")}</div>
+      </div>`;
+    }
+    return "";
+  }).join("\n");
+}
+
+async function boot(){
+  if (!slug) { document.getElementById("articleBody").innerHTML = "<p>Missing blog slug.</p>"; return; }
+  let b = await fetchBlogBySlug(slug, preview);
+  
+  if (!b) { document.getElementById("heroTitle").textContent = "Not found"; document.getElementById("articleBody").innerHTML = `<p>This post does not exist. <a href="/Glock-Media-Blog/Blog-Page.html">Back to blogs</a>.</p>`; return; }
+
+  // SEO
+  document.title = (b.seoTitle || b.title) + " — Glock Media Blog";
+  setMeta("description", b.seoDescription || b.shortDesc);
+  setMeta("keywords", b.keywords);
+  setMeta("og:title", b.seoTitle || b.title, "property");
+  setMeta("og:description", b.seoDescription || b.shortDesc, "property");
+  setMeta("og:image", b.ogImage || b.featuredImage, "property");
+  setMeta("og:type", "article", "property");
+  if (b.canonical) {
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link){ link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
+    link.href = b.canonical;
+  }
+
+  // Hero
+  document.getElementById("heroImg").src = b.featuredImage || "";
+  document.getElementById("heroImg").alt = b.title;
+  document.getElementById("heroCategory").textContent = b.categoryName || "";
+  document.getElementById("heroTitle").textContent = b.title;
+  document.getElementById("heroMeta").innerHTML = `
+    <span class="article-hero-meta-item">👤 ${escapeHTML(b.author||"")}</span>
+    <span class="article-hero-meta-item">📅 ${fmtDate(b.publishDate)}</span>
+    <span class="article-hero-meta-item">⏱ ${escapeHTML(b.readTime||"5 min")} read</span>`;
+
+  // Meta bar
+  const catSlug = (b.categorySlug||"tech").toLowerCase();
+  document.getElementById("articleMetaBar").innerHTML = `
+    <div class="article-meta-author">
+      ${b.authorAvatar?`<img src="${b.authorAvatar}" alt="${escapeHTML(b.author||"")}" class="article-meta-avatar">`:""}
+      <div>
+        <div class="article-meta-name">${escapeHTML(b.author||"")}</div>
+        <div class="article-meta-role">Author</div>
+      </div>
+    </div>
+    <div class="article-meta-divider"></div>
+    <span class="article-meta-item">📅 ${fmtDate(b.publishDate)}</span>
+    <span class="article-meta-item">⏱ ${escapeHTML(b.readTime||"5 min")} read</span>
+    <a href="/Glock-Media-Blog/category.html?slug=${encodeURIComponent(b.categorySlug||"")}" style="text-decoration:none"><span class="article-meta-category ${catSlug}">${escapeHTML(b.categoryName||"")}</span></a>`;
+
+  // Body (rich HTML from Quill with stat-box formatting)
+  document.getElementById("articleBody").innerHTML = formatStatBoxes(b.content || "");
+
+  // Table of Contents
+  const tocSidebar = document.getElementById("tocSidebar");
+  const tocList = document.getElementById("tocList");
+  const bodyH2s = document.querySelectorAll(".article-body h2");
+  let tocItems = b.toc;
+
+  // If no custom TOC is saved, build it dynamically from the H2 headings in the article body
+  if (!tocItems || tocItems.length === 0) {
+    if (bodyH2s.length > 0) {
+      tocItems = Array.from(bodyH2s).map((h2, idx) => {
+        let anchor = h2.getAttribute("id");
+        if (!anchor) {
+          anchor = h2.textContent.trim().toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+          if (!anchor) anchor = `section-${idx + 1}`;
+          h2.setAttribute("id", anchor);
+        }
+        return {
+          anchor: anchor,
+          label: h2.textContent.trim()
+        };
+      });
+    }
+  }
+
+  // Fallback to default static items if we still have absolutely nothing
+  if (!tocItems || tocItems.length === 0) {
+    tocItems = [
+      { anchor: "section-1", label: "The Three Pillars" },
+      { anchor: "section-2", label: "Scriptwriting Revolution" },
+      { anchor: "section-3", label: "Video Editing" },
+      { anchor: "section-4", label: "The Dark Side" },
+      { anchor: "section-5", label: "The 60/40 Rule" },
+      { anchor: "section-6", label: "What is Next" }
+    ];
+  }
+
+  if (tocItems && tocItems.length > 0) {
+    tocSidebar.style.display = "";
+    tocList.innerHTML = tocItems.map((item, index) => {
+      const anchor = item.anchor || `section-${index + 1}`;
+      return `<li><a href="#${anchor}" class="toc-link${index === 0 ? " active" : ""}">${escapeHTML(item.label || "")}</a></li>`;
+    }).join("");
+
+    // Ensure all body H2 elements have ID attributes matching the computed TOC anchors
+    bodyH2s.forEach((h2, idx) => {
+      if (tocItems[idx]) {
+        if (!h2.getAttribute("id")) {
+          h2.setAttribute("id", tocItems[idx].anchor || `section-${idx + 1}`);
+        }
+      }
+    });
+
+    if (window.setupDynamicToc) {
+      window.setupDynamicToc();
+    }
+  } else {
+    tocSidebar.style.display = "none";
+  }
+
+  // Author bio
+  if (b.author) {
+    const bio = document.getElementById("authorBio");
+    bio.style.display = "";
+    bio.innerHTML = `
+      ${b.authorAvatar?`<img src="${b.authorAvatar}" alt="${escapeHTML(b.author)}" class="author-bio-avatar">`:""}
+      <div class="author-bio-content">
+        <div class="author-bio-name">${escapeHTML(b.author)}</div>
+        <div class="author-bio-role">Contributor at Glock Media</div>
+        ${(b.tags||[]).length?`<div class="author-bio-text">Tags: ${b.tags.map(t=>`<span style="display:inline-block;padding:2px 10px;border-radius:100px;background:var(--bg-card);border:1px solid var(--border);font-size:.75rem;margin-right:6px">${escapeHTML(t)}</span>`).join("")}</div>`:""}
+      </div>`;
+  }
+
+  // Related Articles loading (Only real active blogs from database)
+  const relatedSection = document.getElementById("relatedSection");
+  const relatedGrid = document.getElementById("relatedGrid");
+  const viewAllContainer = document.getElementById("viewAllContainer");
+  if (relatedSection && relatedGrid) {
+    let allBlogs = [];
+    try {
+      allBlogs = (await fetchBlogs()) || [];
+    } catch (e) {
+      console.error("Error fetching related blogs:", e);
+    }
+    
+    // Filter blogs to show only valid real ones from Firestore
+    let allMerged = allBlogs.filter(isValidRealBlog);
+
+    // Filter out current post by ID (since multiple posts in the DB might have the same slug/template)
+    let related = allMerged.filter(x => x.id !== b.id);
+
+    // If there are no other posts besides the current one, fall back to showing the current post
+    // so the "More from Glock Media" section stays visible with a valid database blog
+    if (related.length === 0 && allMerged.length > 0) {
+      related = [b];
+    }
+
+    // Prefer posts in the same category
+    const sameCategory = [];
+    const otherCategories = [];
+    related.forEach(x => {
+      if (b.categorySlug && x.categorySlug === b.categorySlug) {
+        sameCategory.push(x);
+      } else {
+        otherCategories.push(x);
+      }
+    });
+    
+    // Combine sameCategory and otherCategories to get at least 3
+    let displayRelated = [...sameCategory, ...otherCategories].slice(0, 3);
+
+    if (displayRelated.length > 0) {
+      relatedSection.style.display = "";
+      relatedSection.classList.add("visible");
+      relatedGrid.innerHTML = displayRelated.map(r => `
+        <a href="/Glock-Media-Blog/blog-post.html?slug=${encodeURIComponent(r.slug)}" class="related-card animate-on-scroll">
+          <img src="${r.featuredImage || ""}" alt="${escapeHTML(r.title)}" class="related-card-img">
+          <div class="related-card-content">
+            <div class="related-card-category" style="color:var(--${(r.categorySlug || "tech").toLowerCase()})">${escapeHTML(r.categoryName || "")}</div>
+            <h3 class="related-card-title">${escapeHTML(r.title)}</h3>
+            <p class="related-card-excerpt">${escapeHTML(r.shortDesc || "")}</p>
+          </div>
+        </a>`).join("");
+
+      // If total blogs in db/fallback is more than 3, display the "View All Blogs" button
+      if (allMerged.length > 3 && viewAllContainer) {
+        viewAllContainer.innerHTML = `<a href="/Glock-Media-Blog/Blog-Page.html" class="view-all-btn">View All Blogs</a>`;
+      } else if (viewAllContainer) {
+        viewAllContainer.innerHTML = "";
+      }
+    } else {
+      relatedSection.style.display = "none";
+    }
+  }
+
+  // Trigger scroll-reveal on all unhidden containers to ensure they transition in perfectly
+  setTimeout(() => {
+    if (window.revealObserver) {
+      const bio = document.getElementById("authorBio");
+      if (bio && bio.style.display !== "none") window.revealObserver.observe(bio);
+      if (tocSidebar && tocSidebar.style.display !== "none") window.revealObserver.observe(tocSidebar);
+      if (relatedSection && relatedSection.style.display !== "none") window.revealObserver.observe(relatedSection);
+      
+      // Also check standard newsletter
+      const news = document.querySelector(".newsletter-container.reveal");
+      if (news) window.revealObserver.observe(news);
+    } else {
+      document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+    }
+  }, 100);
+
+}
+boot().catch(e => { console.error(e); document.getElementById("articleBody").innerHTML = "<p>Failed to load post.</p>"; });
+</script>
+<script src="/script.js"></script>
+</body>
+</html>
